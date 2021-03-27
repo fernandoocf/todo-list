@@ -4,7 +4,7 @@ import {
     DELETE_TODO_REQUEST,
     deleteTodoSUCCESS,
     LOAD_TODOS_REQUEST,
-    loadTodosSuccess
+    loadTodosSuccess, UPDATE_TODO_REQUEST, updateTodoSUCCESS
 } from "../actions";
 
 export const loggerMiddleware = storeAPI => next => action => {
@@ -37,6 +37,16 @@ export const loggerMiddleware = storeAPI => next => action => {
             }).then(todo => {
             next(deleteTodoSUCCESS(todo.id));
             alert("Item removed with success!");
+        });
+        return
+    }
+    if(action.type === UPDATE_TODO_REQUEST) {
+        fetch(`https://605ab2ed27f0050017c05215.mockapi.io/todos/${action.payload.id}`, {method: "PUT", body: JSON.stringify(action.payload)})
+            .then(reponse => {
+                return reponse.json();
+            }).then(todo => {
+            next(updateTodoSUCCESS(todo));
+            alert("Item updated with success!");
         });
         return
     }

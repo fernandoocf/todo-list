@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
-import {deleteTodo, deleteTodoRequest, updateTodo} from '../redux/actions';
+import {deleteTodo, deleteTodoRequest, updateTodo, updateTodoRequest} from '../redux/actions';
 
 function TodoItem({todo}) {
     const [editable, setEditable] = useState(false);
@@ -22,13 +22,13 @@ function TodoItem({todo}) {
                 <button
                     className="btn btn-primary m-2"
                     onClick={() => {
-                        dispatch(updateTodo(
-                            {
-                                ...todo,
-                                name: name
-                            }
-                        ))
                         if (editable) {
+                            dispatch(updateTodoRequest(
+                                {
+                                    ...todo,
+                                    name: name
+                                }
+                            ))
                             setName(todo.name);
                         }
                         setEditable(!editable);
