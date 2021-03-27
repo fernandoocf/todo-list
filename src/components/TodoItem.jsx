@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
-import {deleteTodo, deleteTodoRequest, updateTodo, updateTodoRequest} from '../redux/actions';
+import {deleteTodoRequest, updateTodoRequest} from '../redux/actions';
 
 function TodoItem({todo}) {
     const [editable, setEditable] = useState(false);
@@ -8,7 +8,7 @@ function TodoItem({todo}) {
     const dispatch = useDispatch(todo.name);
     return (
         <div>
-            <div className="row mx-2 align-items-center">
+            <div className="row mx-2 align-items-center mt-5">
                 <div>{todo.id}</div>
                 <div className="col">
                     {editable ?
@@ -20,7 +20,7 @@ function TodoItem({todo}) {
                         : <h4>{todo.name}</h4>}
                 </div>
                 <button
-                    className="btn btn-primary m-2"
+                    className={`m-2 btn ${editable ? "btn-success" : "btn-warning"} `}
                     onClick={() => {
                         if (editable) {
                             dispatch(updateTodoRequest(

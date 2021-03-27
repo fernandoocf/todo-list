@@ -7,7 +7,7 @@ function TodoInput() {
     const dispatch = useDispatch();
     return (
         <div>
-            <div className='row'>
+            <div className='row mt-5'>
                 <input
                     type="text"
                     className="col form-control"
