@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {addTodo} from '../redux/actions';
+import {addTodoRequest} from '../redux/actions';
 import {useDispatch} from "react-redux";
 
 function TodoInput() {
@@ -16,8 +16,15 @@ function TodoInput() {
                 <button
                     className="btn btn-primary mx-2"
                     onClick={() => {
-                        dispatch(addTodo({id: Math.floor(Math.random() * 20), name: name}))
+                        if (name) {
+                            dispatch(
+                                addTodoRequest(
+                                    { name: name
+                                    }))
                             setName('')
+                        } else {
+                            alert("The input needs to be filled!");
+                        }
                     }}>Add</button>
             </div>
         </div>
