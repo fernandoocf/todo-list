@@ -9,7 +9,7 @@ function TodoItem({todo}) {
     return (
         <div>
             <div className="row mx-2 align-items-center mt-5">
-                <div>{todo.id}</div>
+                <div>#{todo.id}</div>
                 <div className="col">
                     {editable ?
                         <input type="text"
