@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
-import {deleteTodo, updateTodo} from '../redux/actions';
+import {deleteTodo, deleteTodoRequest, updateTodo} from '../redux/actions';
 
 function TodoItem({todo}) {
     const [editable, setEditable] = useState(false);
@@ -33,7 +33,7 @@ function TodoItem({todo}) {
                         }
                         setEditable(!editable);
                     }}>{editable ? "Update" : "Edit"}</button>
-                <button className="btn btn-danger m-2"  onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>
+                <button className="btn btn-danger m-2"  onClick={() => dispatch(deleteTodoRequest(todo.id))}>Delete</button>
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import {ADD_TODO_SUCCESS, DELETE_TODO, LOAD_TODOS_SUCCESS, UPDATE_TODO} from "./actions";
+import {ADD_TODO_SUCCESS, DELETE_TODO_SUCCESS, LOAD_TODOS_SUCCESS, UPDATE_TODO} from "./actions";
 
 export const reducer = (state = [], action) => {
     let newTodos;
@@ -9,7 +9,7 @@ export const reducer = (state = [], action) => {
             newTodos = [...state];
             newTodos.push(action.payload);
             return newTodos;
-        case DELETE_TODO:
+        case DELETE_TODO_SUCCESS:
             newTodos = [...state]
             newTodos = newTodos.filter(todo => todo.id !== action.payload);
             return newTodos;

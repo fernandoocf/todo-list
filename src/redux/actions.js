@@ -2,7 +2,8 @@ export const LOAD_TODOS_REQUEST = "LOAD_TODOS_REQUEST";
 export const LOAD_TODOS_SUCCESS = "LOAD_TODOS_SUCCESS";
 export const ADD_TODO_REQUEST = "ADD_TODO_REQUEST";
 export const ADD_TODO_SUCCESS = "ADD_TODO_SUCCESS";
-export const DELETE_TODO = "DELETE_TODO";
+export const DELETE_TODO_REQUEST = "DELETE_TODO_REQUEST";
+export const DELETE_TODO_SUCCESS = "DELETE_TODO_SUCCESS";
 export const UPDATE_TODO = "UPDATE_TODO";
 
 export function loadTodosRequest() {
@@ -34,9 +35,16 @@ export function addTodoSuccess(todo) {
 
 
 
-export function deleteTodo(todoId) {
+export function deleteTodoRequest(todoId) {
     return {
-        type: DELETE_TODO,
+        type: DELETE_TODO_REQUEST,
+        payload: todoId
+    }
+}
+
+export function deleteTodoSUCCESS(todoId) {
+    return {
+        type: DELETE_TODO_SUCCESS,
         payload: todoId
     }
 }
