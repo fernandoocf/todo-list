@@ -10,17 +10,22 @@ import {
 } from "../actions";
 
 export const loggerMiddleware = storeAPI => next => action => {
-    if(action.type === LOAD_TODOS_REQUEST) {
-        _loadAllTodoItems(next, action);
-    }
-    if(action.type === ADD_TODO_REQUEST) {
-        _addTodoItem(next, action);
-    }
-    if(action.type === DELETE_TODO_REQUEST) {
-        _deleteTodoItem(next, action);
-    }
-    if(action.type === UPDATE_TODO_REQUEST) {
-        _updateTodoItem(next, action)
+    switch (action.type) {
+        case LOAD_TODOS_REQUEST:
+            _loadAllTodoItems(next, action);
+            return;
+        case ADD_TODO_REQUEST:
+            _addTodoItem(next, action);
+            return;
+        case DELETE_TODO_REQUEST:
+            _deleteTodoItem(next, action);
+            return;
+        case UPDATE_TODO_REQUEST:
+            _updateTodoItem(next, action)
+            return;
+        default:
+            next(action);
+            return;
     }
 }
 
