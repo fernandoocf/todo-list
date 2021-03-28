@@ -34,8 +34,6 @@ export function addTodoSuccess(todo) {
     }
 }
 
-
-
 export function deleteTodoRequest(todoId) {
     return {
         type: DELETE_TODO_REQUEST,
