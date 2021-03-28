@@ -12,61 +12,63 @@ import {
 export const loggerMiddleware = storeAPI => next => action => {
     switch (action.type) {
         case LOAD_TODOS_REQUEST:
-            _loadAllTodoItems(next, action);
-            return;
+            return _loadAllTodoItems(next, action);
         case ADD_TODO_REQUEST:
-            _addTodoItem(next, action);
-            return;
+            return _addTodoItem(next, action);
         case DELETE_TODO_REQUEST:
-            _deleteTodoItem(next, action);
-            return;
+            return _deleteTodoItem(next, action);
         case UPDATE_TODO_REQUEST:
-            _updateTodoItem(next, action)
-            return;
+            return _updateTodoItem(next, action)
         default:
-            next(action);
-            return;
+            return next(action);
     }
 }
 
 const _loadAllTodoItems = (next, action) => {
-    fetch("https://605ab2ed27f0050017c05215.mockapi.io/todos", {method: "GET"})
+    return fetch("https://605ab2ed27f0050017c05215.mockapi.io/todos", {method: "GET"})
         .then( response => {
             return response.json()
-        }).then(todos => {
-        next(loadTodosSuccess(todos));
-    }, (error) => {
-        alert(error);
-        console.error(error);
-    });
+        })
+        .then(todos => {
+            const result = next(loadTodosSuccess(todos));
+            return result;
+        }, (error) => {
+            alert(error);
+            console.error(error);
+        });
 }
 
 const _addTodoItem = (next, action) => {
-    fetch("https://605ab2ed27f0050017c05215.mockapi.io/todos", {method: "POST", body: JSON.stringify(action.payload)})
+    return fetch("https://605ab2ed27f0050017c05215.mockapi.io/todos", {method: "POST", body: JSON.stringify(action.payload)})
         .then(reponse => {
             return reponse.json();
         }).then(todo => {
-        next(addTodoSuccess(todo));
-        alert("Item added with success!");
-    });
+            const result = next(addTodoSuccess(todo));
+            alert("Item added with success!");
+            return result;
+        });
 }
 
 const _deleteTodoItem = (next, action) => {
-    fetch(`https://605ab2ed27f0050017c05215.mockapi.io/todos/${action.payload}`, {method: "DELETE"})
+    return fetch(`https://605ab2ed27f0050017c05215.mockapi.io/todos/${action.payload}`, {method: "DELETE"})
         .then(reponse => {
             return reponse.json();
-        }).then(todo => {
-        next(deleteTodoSUCCESS(todo.id));
-        alert("Item removed with success!");
-    });
+        })
+        .then(todo => {
+            const result = next(deleteTodoSUCCESS(todo.id));
+            alert("Item removed with success!");
+            return result;
+        });
 }
 
 const _updateTodoItem = (next, action) => {
-    fetch(`https://605ab2ed27f0050017c05215.mockapi.io/todos/${action.payload.id}`, {method: "PUT", body: JSON.stringify(action.payload)})
+    return fetch(`https://605ab2ed27f0050017c05215.mockapi.io/todos/${action.payload.id}`, {method: "PUT", body: JSON.stringify(action.payload)})
         .then(reponse => {
             return reponse.json();
-        }).then(todo => {
-        next(updateTodoSUCCESS(todo));
-        alert("Item updated with success!");
-    });
+        })
+        .then(todo => {
+            const result = next(updateTodoSUCCESS(todo));
+            alert("Item updated with success!");
+            return result;
+        });
 }
