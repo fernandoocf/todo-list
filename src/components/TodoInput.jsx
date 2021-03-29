@@ -9,11 +9,13 @@ function TodoInput() {
         <div>
             <div className='row mt-5'>
                 <input
+                    data-testid="input-field"
                     type="text"
                     className="col form-control"
                     onChange={(e) => setName(e.target.value)}
                     value={name}/>
                 <button
+                    data-testid="input-btn"
                     className="btn btn-primary mx-2"
                     onClick={() => {
                         if (name) {

@@ -8,11 +8,12 @@ function TodoItem({todo}) {
     const dispatch = useDispatch(todo.name);
     return (
         <div>
-            <div className="row mx-2 align-items-center mt-5">
+            <div data-testid="todo-item" className="row mx-2 align-items-center mt-5">
                 <div>#{todo.id}</div>
                 <div className="col">
                     {editable ?
                         <input type="text"
+                               data-testid="input-editable"
                                className="form-control"
                                placeholder={todo.name}
                                value={name}
@@ -20,6 +21,7 @@ function TodoItem({todo}) {
                         : <h4>{todo.name}</h4>}
                 </div>
                 <button
+                    data-testid="update-btn"
                     className={`m-2 btn ${editable ? "btn-success" : "btn-warning"} `}
                     onClick={() => {
                         if (editable) {
@@ -33,7 +35,7 @@ function TodoItem({todo}) {
                         }
                         setEditable(!editable);
                     }}>{editable ? "Update" : "Edit"}</button>
-                <button className="btn btn-danger m-2"  onClick={() => dispatch(deleteTodoRequest(todo.id))}>Delete</button>
+                <button data-testid="delete-btn" className="btn btn-danger m-2"  onClick={() => dispatch(deleteTodoRequest(todo.id))}>Delete</button>
             </div>
         </div>
     )
